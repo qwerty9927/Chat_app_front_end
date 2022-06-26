@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import cookie from 'js-cookie'
 import './App.css';
+import { selectState } from './components/features/auth/authSlice';
+import LayoutAuth from './components/layouts/LayoutAuth'
+import LayoutApp from './components/layouts/LayoutApp'
+import Login from './components/features/auth/Login'
+import Resgister from './components/features/auth/Resgister'
+import AutoDirecte from './components/NotFound/AutoDirecte'
 
 function App() {
+  const stateAuth = useSelector(selectState)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Routes>
+      {cookie.get('accessToken') ?
+        <Route path="/" element={<LayoutApp />}>
+          <Route path="*" element={<AutoDirecte />}/>
+        </Route>
+      :
+        <Route path="/" element={<LayoutAuth />} >
+          <Route index element={<Login />} />
+          <Route path="resgister" element={<Resgister />} />
+          <Route path="*" element={<AutoDirecte />}/>
+        </Route>
+      }
+    </Routes>
+  )
+  
 }
-
 export default App;
+  
