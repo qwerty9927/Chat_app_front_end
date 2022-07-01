@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectState, resgister } from './authSlice'
+import { selectState, resgister, reset } from './authSlice'
 import style from './css/auth.module.scss'
 
 export default function Resgister(){
@@ -108,7 +108,7 @@ export default function Resgister(){
         </div>
         <div>
           <span>Is a member</span>
-          <Link to="/">Sign in now</Link>
+          <Link to="/" onClick={() => {dispatch(reset())}}>Sign in now</Link>
         </div>
       </div>
     </form>

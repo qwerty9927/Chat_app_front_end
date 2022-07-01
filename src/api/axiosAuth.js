@@ -20,7 +20,6 @@ const del = async (path, option) => {
 }
 
 instance.interceptors.response.use((response) => {
-  console.log(response)
   return response
 }, (error) => {
   console.log("error")

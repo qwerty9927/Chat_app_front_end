@@ -13,7 +13,7 @@ function App() {
   const stateAuth = useSelector(selectState)
   return (
     <Routes>
-      {cookie.get('accessToken') ?
+      {(JSON.parse(localStorage.getItem('auth')) || {}).isSuccess ?
         <Route path="/" element={<LayoutApp />}>
           <Route path="*" element={<AutoDirecte />}/>
         </Route>
