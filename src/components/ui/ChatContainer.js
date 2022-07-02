@@ -10,7 +10,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import TextField from '@mui/material/TextField'
 import SearchIcon from '@mui/icons-material/Search';
-import { HoverIconButton, HoverButton } from '../globalStyle/style'
+import { HoverIconButton, HoverButton } from './globalStyle/style'
 import List from '@mui/material/List'
 import Divider from '@mui/material/Divider'
 import MicIcon from '@mui/icons-material/Mic';

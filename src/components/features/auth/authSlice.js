@@ -67,10 +67,10 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
-      localStorage.setItem('auth', JSON.stringify(state))
       state.isSuccess = true
       state.isFetching = false
       state.currentUser = action.payload
+      localStorage.setItem('auth', JSON.stringify(state))
     })
     builder.addCase(login.pending, (state) => {
       state.isFetching = true

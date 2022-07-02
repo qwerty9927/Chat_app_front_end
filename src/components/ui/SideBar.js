@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
@@ -8,21 +8,16 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
-import { logout } from '../../features/auth/authSlice';
-import { HoverIconButton } from '../globalStyle/style'
+import { logout } from '../features/auth/authSlice';
+import { HoverIconButton } from './globalStyle/style'
+import { selectAdd, selectMessage, selectRequest, selectSetting, selectStateMenu } from '../features/menu/menuSlice';
 
 function SideBar(){
+  const state = useSelector(selectStateMenu)
+  const domBtnMessage = useRef({})
+  const domBtnAdd = useRef({})
+  const domBtnRequest = useRef({})
   const dispatch = useDispatch()
-  const initValue = {
-    chat: true,
-    settings: false,
-    addUser: false,
-    mail: false
-  }
-  const [ clickBtn, setClickBtn ] = useState(initValue)
-  const activeClick = (btnState) => {
-    return {...initValue, chat: false, ...btnState}
-  }
   return (
     <Box sx={{
       bgcolor: '#121216',
@@ -43,17 +38,17 @@ function SideBar(){
             flexDirection: 'column',
             justifyContent: 'center'
           }}>
-            <HoverIconButton color='primary' onClick={() => {setClickBtn(activeClick({chat: true}))}}>
-              {clickBtn.chat ? <ChatIcon /> : <ChatIcon sx={{color: '#595966'}} />}
+            <HoverIconButton color='primary' ref={domBtnMessage}  onClick={() => {dispatch(selectMessage(domBtnMessage.current))}}>
+              {state.status.chat ? <ChatIcon /> : <ChatIcon sx={{color: '#595966'}} />}
             </HoverIconButton>
-            <HoverIconButton color='primary' onClick={() => {setClickBtn(activeClick({addUser: true}))}}>
-              {clickBtn.addUser ? <PersonAddIcon /> : <PersonAddIcon sx={{color: '#595966'}} />}
+            <HoverIconButton color='primary' ref={domBtnAdd} onClick={() => {dispatch(selectAdd(domBtnAdd.current))}}>
+              {state.status.addUser ? <PersonAddIcon /> : <PersonAddIcon sx={{color: '#595966'}} />}
             </HoverIconButton>
-            <HoverIconButton color='primary' onClick={() => {setClickBtn(activeClick({mail: true}))}}>
-              {clickBtn.mail ? <LocalPostOfficeIcon /> : <LocalPostOfficeIcon sx={{color: '#595966'}} />}
+            <HoverIconButton color='primary' ref={domBtnRequest} onClick={() => {dispatch(selectRequest(domBtnRequest.current))}}>
+              {state.status.request ? <LocalPostOfficeIcon /> : <LocalPostOfficeIcon sx={{color: '#595966'}} />}
             </HoverIconButton>
-            <HoverIconButton color='primary' onClick={() => {setClickBtn(activeClick({settings: true}))}}>
-              {clickBtn.settings ? <SettingsIcon /> : <SettingsIcon sx={{color: '#595966'}} />}
+            <HoverIconButton color='primary'>
+              <SettingsIcon sx={{color: '#595966'}} />
             </HoverIconButton>
           </Box>
         </Grid>

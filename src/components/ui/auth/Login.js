@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import * as request from '../../../api/axiosAuth'
-import { login, selectState, reset } from "./authSlice"
+import { login, selectState, reset } from "../../features/auth/authSlice"
 import style from './css/auth.module.scss'
 
 export default function Login() {

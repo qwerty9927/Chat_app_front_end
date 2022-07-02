@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectState, resgister, reset } from './authSlice'
+import { selectState, resgister, reset } from '../../features/auth/authSlice'
 import style from './css/auth.module.scss'
 
 export default function Resgister(){

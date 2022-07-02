@@ -1,4 +1,3 @@
-import { Fragment, useState } from 'react'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
@@ -10,27 +9,26 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import TextField from '@mui/material/TextField'
 import SearchIcon from '@mui/icons-material/Search';
-import { HoverIconButton, HoverButton } from '../globalStyle/style'
+import { HoverIconButton } from '../globalStyle/style'
 import List from '@mui/material/List'
-import Divider from '@mui/material/Divider'
 import { alpha } from '@mui/material'
 
-function Menu() {
-  const [ selectedIndex, setSelectedIndex ] = useState()
-  const handleClick = (value) => {
-    setSelectedIndex(value)
-  }
+function BaseMenu({ type, title, count }) {
+  
   return (
-    <Box sx={{
-      bgcolor: '#181a1e',
-      color: '#fff',
-      pl: 1,
-      height: '100vh',
-      '& .MuiSvgIcon-root': {
+    <Box 
+      open={true}
+      sx={{
+        bgcolor: '#181a1e',
         color: '#fff',
-        opacity: 0.3
-      }
-    }}>
+        pl: 1,
+        height: '100vh',
+        '& .MuiSvgIcon-root': {
+          color: '#fff',
+          opacity: 0.3
+        }
+      }}
+    >
       <Grid container direction='column' sx={{ height: 'inherit' }}>
         <Grid item xs={3}>
           <Box>
@@ -60,15 +58,15 @@ function Menu() {
           </Box>
           <Box>
             <ListItem 
-              secondaryAction={
-                <HoverIconButton>
-                  <BorderColorIcon />
-                </HoverIconButton>
-              }
+              // secondaryAction={
+              //   <HoverIconButton>
+              //     <BorderColorIcon />
+              //   </HoverIconButton>
+              // }
             >
               <ListItemText>
                 <Typography component='span' variant="body1" sx={{fontWeight: 'bold'}} >
-                  Messages (20)
+                  {`${title} (${count})`}
                 </Typography>
               </ListItemText>
             </ListItem>
@@ -111,41 +109,7 @@ function Menu() {
               borderRadius: 5
             }
           }}>
-            {[1,2,3,4,5,6,7,8].map((value, index) => {
-              return (
-                <Fragment key={index}>
-                  <HoverButton
-                    key={index}
-                    selected={selectedIndex === value}
-                    onClick={() => {handleClick(value)}}
-                    sx={{borderRadius: 2}}
-                  >    
-                    <ListItemAvatar>
-                      <Avatar>T</Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="Name"
-                      secondary={
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          sx={{ opacity: 0.2 }}
-                        >
-                          Message
-                        </Typography>
-                      }
-                    >
-                    </ListItemText>
-                    <Typography variant='body2' sx={{ color: '#fff',opacity: 0.3}}>
-                      6:22
-                    </Typography>
-                  </HoverButton>
-                  <Divider variant="middle" component="li" sx={{
-                    borderColor: alpha('#fff', 0.1)
-                  }} />
-                </Fragment>
-              )
-            })}
+            {type}
           </List>
         </Grid>
       </Grid>
@@ -153,4 +117,4 @@ function Menu() {
   )
 }
 
-export default Menu
+export default BaseMenu

@@ -5,8 +5,8 @@ import './App.css';
 import { selectState } from './components/features/auth/authSlice';
 import LayoutAuth from './components/layouts/LayoutAuth'
 import LayoutApp from './components/layouts/LayoutApp'
-import Login from './components/features/auth/Login'
-import Resgister from './components/features/auth/Resgister'
+import Login from './components/ui/auth/Login'
+import Resgister from './components/ui/auth/Resgister'
 import AutoDirecte from './components/NotFound/AutoDirecte'
 
 function App() {
