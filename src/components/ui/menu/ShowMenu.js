@@ -2,19 +2,15 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { menuMessage, menuAdd, menuRequest, menuSetting } from '../../../config/instance'
 import { clearDom, selectStateMenu } from '../../features/menu/menuSlice'
-import BaseMenu from './BaseMenu'
-import MenuMessage, { titleMessage, CountMessage } from './MenuMessage'
-import MenuAdd, { titleAdd, CountAdd } from './MenuAdd'
-import MenuRequest, { titleRequest, CountRequest } from './MenuRequest'
+import MenuMessage from './MenuMessage'
+import MenuAdd from './MenuAdd'
+import MenuRequest from './MenuRequest'
 import { Menu } from '@mui/material'
 
 function ShowMenu({ responsive }) {
-  const [anchorEl, setAnchorEl] = useState(null);
   const state = useSelector(selectStateMenu)
   const dispatch = useDispatch()
   let Component
-  let title
-  let count
   const open = Boolean(state.dom);
   const handleClose = () => {
     dispatch(clearDom())
@@ -22,18 +18,12 @@ function ShowMenu({ responsive }) {
 
   switch (state.type) {
     case menuMessage:
-      title = titleMessage()
-      count = CountMessage()
       Component = MenuMessage
       break
     case menuAdd:
-      title = titleAdd()
-      count = CountAdd()
       Component = MenuAdd
       break
     case menuRequest:
-      title = titleRequest()
-      count = CountRequest()
       Component = MenuRequest
       break
   }
@@ -75,12 +65,12 @@ function ShowMenu({ responsive }) {
         }}
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
-        <BaseMenu type={<Component />} title={title} count={count} />
+        <Component />
       </Menu>
     )
   }
   return (
-    <BaseMenu type={<Component />} title={title} count={count} />
+    <Component />
   )
 }
 

@@ -50,25 +50,22 @@ const initialState = JSON.parse(localStorage.getItem('auth')) || {
   isSuccess: false,
   isError: false,
   currentUser: null,
-  counter: 0
+  isResgister: false,
 }
 
 const authSlice = createSlice({
   name: "authorization",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.counter += 1
-    },
     reset: (state) => {
-      state = initialState
-      return state
+      return initialState
     }
   },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
       state.isSuccess = true
       state.isFetching = false
+      state.isError = false
       state.currentUser = action.payload
       localStorage.setItem('auth', JSON.stringify(state))
     })
@@ -80,13 +77,15 @@ const authSlice = createSlice({
       state.isError = true
     })
     builder.addCase(resgister.fulfilled, (state) => {
-      // state.isSuccess = true
+      state.isResgister = true
       state.isFetching = false
+      state.isError = false
     })
     builder.addCase(resgister.pending, (state) => {
       state.isFetching = true
     })
     builder.addCase(resgister.rejected, (state) => {
+      state.isResgister = false
       state.isFetching = false
       state.isError = true
     })
@@ -104,5 +103,5 @@ const selectState = (state) => state.auth
 
 
 export { login, resgister, selectState, logout } 
-export const { increment, reset } = authSlice.actions
+export const { reset } = authSlice.actions
 export default authSlice.reducer

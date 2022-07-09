@@ -13,7 +13,7 @@ export default function Resgister(){
   const [formErrors, setFormErrors] = useState({})
 
   useEffect(() => {
-    if(user.isSuccess){
+    if(user.isResgister){
       alert("Resgister success")
       navigate("/")
     }

@@ -1,31 +1,13 @@
-import Cookies from 'js-cookie'
-import { useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
 import Grid from '@mui/material/Grid'
-import Menu from '@mui/material/Menu'
 import Box from '@mui/material/Box'
 import Hidden from '@mui/material/Hidden'
 import Divider from '@mui/material/Divider'
 import { alpha } from '@mui/material/styles'
-import axiosToken from '../../api/axiosToken'
 import SideBar from '../ui/SideBar'
-import BaseMenu from '../ui/menu/BaseMenu'
 import ChatContainer from '../ui/ChatContainer'
 import ShowMenu from '../ui/menu/ShowMenu'
 
 function LayoutApp() {
-  
-  useEffect(() => {
-    const fetchApi = async () => {
-      const result = await axiosToken.get('user/getAll',{
-        headers: {
-          Authorization: `Bearer ${Cookies.get("accessToken")}`
-        }
-      })
-      console.log(result)
-    }
-    // fetchApi()
-  })
   return (
     <Box sx={{
       'input': {

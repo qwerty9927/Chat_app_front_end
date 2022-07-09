@@ -4,21 +4,10 @@ import Cookies from 'js-cookie'
 const instance = axios.create({
   baseURL: "http://localhost:5000/",
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${Cookies.get("accessToken")}`
   }
 })
-
-const axiosToken = {
-  get: async (path, option) => {
-    return await instance.get(path, option)
-  },
-  post: async (path, option1, option2) => {
-    return await instance.post(path, option1, option2)
-  },
-  del: async (path, option) => {
-    return await instance.delete(path, option)
-  }
-}
 
 instance.interceptors.response.use((response) => {
   return response
@@ -39,4 +28,4 @@ instance.interceptors.response.use((response) => {
   })
 })
 
-export default axiosToken
+export default instance
