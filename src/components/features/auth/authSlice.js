@@ -91,10 +91,7 @@ const authSlice = createSlice({
     })
     builder.addCase(logout.fulfilled, (state) => {
       localStorage.removeItem('auth')
-      state.isFetching = false
-      state.isSuccess = false
-      state.isError = false
-      state.currentUser = null
+      return initialState
     })
   }
 })

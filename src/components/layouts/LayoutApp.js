@@ -4,7 +4,7 @@ import Hidden from '@mui/material/Hidden'
 import Divider from '@mui/material/Divider'
 import { alpha } from '@mui/material/styles'
 import SideBar from '../ui/SideBar'
-import ChatContainer from '../ui/ChatContainer'
+import ShowContainer from '../ui/container/ShowContainer'
 import ShowMenu from '../ui/menu/ShowMenu'
 
 function LayoutApp() {
@@ -34,7 +34,7 @@ function LayoutApp() {
           <ShowMenu responsive />
         </Hidden>
         <Grid item xs sm={5.5} md>
-          <ChatContainer />
+          <ShowContainer />
         </Grid>
       </Grid>
     </Box>

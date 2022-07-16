@@ -10,20 +10,28 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import { logout } from '../features/auth/authSlice';
 import { HoverIconButton } from './globalStyle/style'
-import { selectAdd, selectMessage, selectRequest, selectSetting, selectStateMenu } from '../features/menu/menuSlice';
+import { clearAllMenu, selectAdd, selectMessage, selectRequest, selectSetting, selectStateMenu } from '../features/menu/menuSlice';
+import {clearAllItems} from '../features/container/containerSlice'
 
-function SideBar(){
+function SideBar() {
   const state = useSelector(selectStateMenu)
   const domBtnMessage = useRef({})
   const domBtnAdd = useRef({})
   const domBtnRequest = useRef({})
   const dispatch = useDispatch()
+
+  function handleLogOut(){
+    dispatch(logout())
+    dispatch(clearAllItems())
+    dispatch(clearAllMenu())
+  }
+
   return (
     <Box sx={{
       bgcolor: '#121216',
       height: '100vh'
     }}>
-      <Grid container 
+      <Grid container
         direction="column"
         justifyContent="center"
         alignItems="center"
@@ -38,23 +46,44 @@ function SideBar(){
             flexDirection: 'column',
             justifyContent: 'center'
           }}>
-            <HoverIconButton color='primary' ref={domBtnMessage}  onClick={() => {dispatch(selectMessage(domBtnMessage.current))}}>
-              {state.status.chat ? <ChatIcon /> : <ChatIcon sx={{color: '#595966'}} />}
+            <HoverIconButton
+              color='primary'
+              ref={domBtnMessage}
+              onClick={() => {
+                dispatch(clearAllItems())
+                dispatch(selectMessage(domBtnMessage.current))
+              }}
+            >
+              {state.status.chat ? <ChatIcon /> : <ChatIcon sx={{ color: '#595966' }} />}
             </HoverIconButton>
-            <HoverIconButton color='primary' ref={domBtnAdd} onClick={() => {dispatch(selectAdd(domBtnAdd.current))}}>
-              {state.status.addUser ? <PersonAddIcon /> : <PersonAddIcon sx={{color: '#595966'}} />}
+            <HoverIconButton 
+              color='primary' 
+              ref={domBtnAdd} 
+              onClick={() => { 
+                dispatch(clearAllItems())
+                dispatch(selectAdd(domBtnAdd.current)) 
+              }}
+            >
+              {state.status.addUser ? <PersonAddIcon /> : <PersonAddIcon sx={{ color: '#595966' }} />}
             </HoverIconButton>
-            <HoverIconButton color='primary' ref={domBtnRequest} onClick={() => {dispatch(selectRequest(domBtnRequest.current))}}>
-              {state.status.request ? <LocalPostOfficeIcon /> : <LocalPostOfficeIcon sx={{color: '#595966'}} />}
+            <HoverIconButton 
+              color='primary' 
+              ref={domBtnRequest} 
+              onClick={() => { 
+                dispatch(clearAllItems())
+                dispatch(selectRequest(domBtnRequest.current))
+              }}
+            >
+              {state.status.request ? <LocalPostOfficeIcon /> : <LocalPostOfficeIcon sx={{ color: '#595966' }} />}
             </HoverIconButton>
             <HoverIconButton color='primary'>
-              <SettingsIcon sx={{color: '#595966'}} />
+              <SettingsIcon sx={{ color: '#595966' }} />
             </HoverIconButton>
           </Box>
         </Grid>
         <Grid item xs={1}>
-          <HoverIconButton onClick={() => {dispatch(logout())}}>
-            <LogoutIcon sx={{color: '#595966'}} />
+          <HoverIconButton onClick={handleLogOut}>
+            <LogoutIcon sx={{ color: '#595966' }} />
           </HoverIconButton>
         </Grid>
       </Grid>
