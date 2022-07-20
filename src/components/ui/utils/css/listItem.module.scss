@@ -1,0 +1,52 @@
+.item {
+  padding: 1rem;
+  display: flex;
+  background-color: #121216;
+  color: #fff;
+}
+
+.item:hover {
+  background-color: rgba(15, 1, 63, 0.3);
+}
+
+.itemActive{
+  background-color: rgba(255,255,255,.1);
+}
+
+.avatar {
+  flex: 1;
+  .circle {
+    height: 40px;
+    width: 40px;
+    background-color: #ccc;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+
+.content {
+  flex: 4;
+  font-weight: 500;
+  padding: 0 0.625rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  .message {
+    font-size: 12px;
+    color: rgba(255,255,255, .8);
+  }
+}
+
+.action {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  span {
+    color: #595966;
+  }
+}

@@ -4,10 +4,13 @@ import Cookies from 'js-cookie'
 
 // My import
 import style from './css/menu.module.scss'
+import ListItem from '../utils/ListItem'
+import Button from '../utils/Button'
 import axiosToken from '../../../api/axiosToken'
 import { selectState } from '../../features/auth/authSlice'
 import { selectChatRoom, selectStateContainer } from '../../features/container/containerSlice'
 import clsx from 'clsx'
+import Skeleton from '../utils/Skeleton'
 
 function MenuMessage({ className }) {
   const quantityGetDefault = 10
@@ -173,10 +176,52 @@ function MenuMessage({ className }) {
   return (
     <div className={clsx(className, style.menu)}>
       <div className={style.header}>
-
+        <ListItem 
+          avatar={state.currentUser.Name.split("")[0]}
+          name={state.currentUser.Name} 
+          primary={
+            <Button>
+              <i className="fa-solid fa-ellipsis"></i>
+            </Button>
+          }
+          message={"Message"}
+        >
+        </ListItem>
+        <div className={style.title}>{`Message (${quantityOfMessage})`}</div>
+        <div className={style.search}>
+          <input type="text" placeholder='Search' onChange={handleChange} />
+          <Button onClick={handleSearch}>
+            <i className="fa-solid fa-magnifying-glass"></i>
+          </Button>
+        </div>
       </div>
       <div className={clsx(style.list, "list")}>
-
+          {listFriend.map((item, index) => {
+            return (
+              <Fragment key={index}>
+                <ListItem 
+                  selected={selectedIndex === index}
+                  onClick={() => { handleClick(index, item) }}
+                  avatar={item.NameFriend.split("")[0]}
+                  name={item.NameFriend} 
+                  primary={
+                   <span>6:22</span>
+                  }
+                  message={"Message"}
+                >
+                </ListItem>
+                <div className={style.hr}></div>
+              </Fragment>
+            )
+          })}
+          {loading ? (
+            <ListItem 
+              avatar={<Skeleton type="avatar" />}
+              name={<Skeleton />} 
+              message={<Skeleton />}
+            >
+            </ListItem>
+          ) : null}
       </div>
     </div>
     // <Box 

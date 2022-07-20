@@ -6,10 +6,65 @@
 
 .header {
   flex: 2;
+  color: #fff;
+
+  & > div:first-child {
+    background-color: #181a1e;
+  }
+
+  .title {
+    font-weight: 500;
+    padding: 1rem 1.625rem;
+  }
+
+  .search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    input {
+      flex: 1;
+      height: 2.5rem;
+      color: #fff;
+      margin-right: 0.3125rem;
+      background-color: #121216;
+      border-radius: 0.3125rem;
+      border: 2px solid #000;
+      padding: 0.625rem;
+    }
+
+    input:focus {
+      border-color: transparent;
+      outline: 2px solid #3f51b5;
+    }
+  }
 }
 
 .list {
   flex: 10;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: auto;
+  padding: 0.625rem;
+
+  &::-webkit-scrollbar {
+    width: 0.5em;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #282a39;
+    border-radius: 0.3125rem;
+  }
+
+  & > div {
+    padding: 1.3125rem 1rem;
+    border-radius: 0.625rem;
+  }
+
+  .hr {
+    margin: 0 1rem;
+    padding: 0.03125rem 0;
+    background-color: rgba(255,255,255, .2);
+  }
 }
