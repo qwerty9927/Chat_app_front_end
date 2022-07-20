@@ -2,9 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { menuMessage, menuAdd, menuRequest, menuSetting } from '../../../config/instance'
 
 const initialState = {
-  indexForMenuResponsive: 0,
   type: menuMessage,
-  dom: null,
   status: {
     chat: true,
     addUser: false,
@@ -17,16 +15,13 @@ const menuSlice = createSlice({
   initialState,
   reducers: {
     selectMessage(state, action) {
-      return {  ...initialState, indexForMenuResponsive: 0, type: menuMessage, status: {...initialState.status, chat: true }, dom: action.payload}
+      return {  ...initialState, type: menuMessage, status: {...initialState.status, chat: true }}
     },
     selectAdd(state, action) {
-      return {  ...initialState, indexForMenuResponsive: 1, type: menuAdd, status: {...initialState.status, chat: false, addUser: true }, dom: action.payload}
+      return {  ...initialState, type: menuAdd, status: {...initialState.status, chat: false, addUser: true }}
     },
     selectRequest(state, action) {
-      return {  ...initialState, indexForMenuResponsive: 2, type: menuRequest, status: {...initialState.status, chat: false, request: true }, dom: action.payload}
-    },
-    clearDom(state){
-      return { ...state, dom: null}
+      return {  ...initialState, type: menuRequest, status: {...initialState.status, chat: false, request: true }}
     },
     clearAllMenu(state){
       return initialState

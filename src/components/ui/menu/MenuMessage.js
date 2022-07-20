@@ -1,26 +1,15 @@
 import {  Fragment ,useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Cookies from 'js-cookie'
-import Typography from '@mui/material/Typography'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
-import Avatar from '@mui/material/Avatar'
-import ListItemText from '@mui/material/ListItemText'
-import ListItem from '@mui/material/ListItem'
-import Box from '@mui/material/Box'
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import TextField from '@mui/material/TextField'
-import SearchIcon from '@mui/icons-material/Search';
-import List from '@mui/material/List'
-import Divider from '@mui/material/Divider'
-import Skeleton from '@mui/material/Skeleton'
-import { alpha } from '@mui/material'
+
 // My import
-import { HoverButton, HoverIconButton } from '../globalStyle/style'
+import style from './css/menu.module.scss'
 import axiosToken from '../../../api/axiosToken'
 import { selectState } from '../../features/auth/authSlice'
 import { selectChatRoom, selectStateContainer } from '../../features/container/containerSlice'
+import clsx from 'clsx'
 
-function MenuMessage() {
+function MenuMessage({ className }) {
   const quantityGetDefault = 10
   const pageDefault = 0
   const initStateFeatureBase = {
@@ -83,7 +72,9 @@ function MenuMessage() {
   //Sử lý scroll
   useEffect(() => {
     let page = 0
-    const list = document.querySelector(".list")
+    console.log(`.${style.list}`)
+    const list = document.querySelector(`.list`)
+    console.log(list)
     const handleScroll = async (e) => {
       const el = e.target;
       if(Math.ceil(el.scrollTop + el.clientHeight) === el.scrollHeight - 1) {
@@ -180,151 +171,159 @@ function MenuMessage() {
   }
 
   return (
-    <Box 
-      sx={{
-        bgcolor: '#181a1e',
-        color: '#fff',
-        pl: 1,
-        height: '100vh',
-        '& .MuiSvgIcon-root': {
-          color: '#fff',
-          opacity: 0.3
-        }
-      }}
-    >
-        <div style={{height: '25%'}}>
-          <Box>
-            <ListItem
-              secondaryAction={
-                <HoverIconButton>
-                  <MoreHorizIcon />
-                </HoverIconButton>
-              }>
-              <ListItemAvatar>
-                <Avatar>{state.currentUser.Name.split('')[0]}</Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary={state.currentUser.Name}
-                secondary={
-                  <Typography
-                    component="span"
-                    variant="body3"
-                    sx={{ opacity: 0.2 }}
-                  >
-                    Infomation
-                  </Typography>
-                }
-              >
-              </ListItemText>
-            </ListItem>
-          </Box>
-          <Box>
-            <ListItem 
-            >
-              <ListItemText>
-                <Typography component='span' variant="body1" sx={{fontWeight: 'bold'}} >
-                  {`Message (${quantityOfMessage})`}
-                </Typography>
-              </ListItemText>
-            </ListItem>
-            <ListItem>
-              <TextField 
-                fullWidth 
-                placeholder='Search'
-                size='small'
-                sx={{
-                  backgroundColor: '#121216',
-                  '& input': {
-                    color: '#fff'
-                  }
-                }} 
-                onChange={
-                  handleChange
-                }
-              />
-              <HoverIconButton onClick={
-                handleSearch
-              }>
-                <SearchIcon />
-              </HoverIconButton>
-            </ListItem>
-          </Box>
-        </div>
-        <div style={{marginTop: 16, height: '75%'}}>
-          <List
-          className='list'
-          sx={{
-            position: 'relative',
-            overflow: 'auto',
-            height: 550, 
-            p: 0,
-            pr: 1,
-            '& .MuiListItemButton-root.Mui-selected': {
-              backgroundColor: alpha('#fff', 0.3)
-            },
-            '&::-webkit-scrollbar': {
-              width: '0.5em'
-            },
-            '&::-webkit-scrollbar-track': {
-            },
-            '&::-webkit-scrollbar-thumb': {
-              backgroundColor: '#282a39',
-              borderRadius: 5
-            }
-          }}>
-            {listFriend.map((item, index) => {
-              return (
-                <Fragment key={index}>
-                  <HoverButton
-                    selected={selectedIndex === index}
-                    onClick={() => { handleClick(index, item) }}
-                    sx={{ borderRadius: 2 }}
-                  >
-                    <ListItemAvatar>
-                      <Avatar>{item.NameFriend.split('')[0]}</Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary= {`${item.NameFriend}`}
-                      secondary={
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          sx={{ opacity: 0.2 }}
-                        >
-                          Message
-                        </Typography>
-                      }
-                    >
-                    </ListItemText>
-                    <Typography variant='body2' sx={{ color: '#fff', opacity: 0.3 }}>
-                      6:22
-                    </Typography>
-                  </HoverButton>
-                  <Divider variant="middle" sx={{
-                    borderColor: alpha('#fff', 0.1)
-                  }} />
-                </Fragment>
-              )
-            })}
-            {loading ? (
-              <ListItem
-                sx={{
-                  '& .MuiSkeleton-root': {
-                    bgcolor: "grey.800"
-                  }
-                }}>
-                <ListItemAvatar>
-                  <Skeleton variant="circular" width={40} height={40} />
-                </ListItemAvatar>
-                <ListItemText>
-                  <Skeleton variant="text" />
-                  <Skeleton variant="text" />
-                </ListItemText>
-              </ListItem>
-            ) : null}
-          </List>
-        </div>
-    </Box>
+    <div className={clsx(className, style.menu)}>
+      <div className={style.header}>
+
+      </div>
+      <div className={clsx(style.list, "list")}>
+
+      </div>
+    </div>
+    // <Box 
+    //   sx={{
+    //     bgcolor: '#181a1e',
+    //     color: '#fff',
+    //     pl: 1,
+    //     height: '100vh',
+    //     '& .MuiSvgIcon-root': {
+    //       color: '#fff',
+    //       opacity: 0.3
+    //     }
+    //   }}
+    // >
+    //     <div style={{height: '25%'}}>
+    //       <Box>
+    //         <ListItem
+    //           secondaryAction={
+    //             <HoverIconButton>
+    //               <MoreHorizIcon />
+    //             </HoverIconButton>
+    //           }>
+    //           <ListItemAvatar>
+    //             <Avatar>{state.currentUser.Name.split('')[0]}</Avatar>
+    //           </ListItemAvatar>
+    //           <ListItemText
+    //             primary={state.currentUser.Name}
+    //             secondary={
+    //               <Typography
+    //                 component="span"
+    //                 variant="body3"
+    //                 sx={{ opacity: 0.2 }}
+    //               >
+    //                 Infomation
+    //               </Typography>
+    //             }
+    //           >
+    //           </ListItemText>
+    //         </ListItem>
+    //       </Box>
+    //       <Box>
+    //         <ListItem 
+    //         >
+    //           <ListItemText>
+    //             <Typography component='span' variant="body1" sx={{fontWeight: 'bold'}} >
+    //               {`Message (${quantityOfMessage})`}
+    //             </Typography>
+    //           </ListItemText>
+    //         </ListItem>
+    //         <ListItem>
+    //           <TextField 
+    //             fullWidth 
+    //             placeholder='Search'
+    //             size='small'
+    //             sx={{
+    //               backgroundColor: '#121216',
+    //               '& input': {
+    //                 color: '#fff'
+    //               }
+    //             }} 
+    //             onChange={
+    //               handleChange
+    //             }
+    //           />
+    //           <HoverIconButton onClick={
+    //             handleSearch
+    //           }>
+    //             <SearchIcon />
+    //           </HoverIconButton>
+    //         </ListItem>
+    //       </Box>
+    //     </div>
+    //     <div style={{marginTop: 16, height: '75%'}}>
+    //       <List
+    //       className='list'
+    //       sx={{
+    //         position: 'relative',
+    //         overflow: 'auto',
+    //         height: 550, 
+    //         p: 0,
+    //         pr: 1,
+    //         '& .MuiListItemButton-root.Mui-selected': {
+    //           backgroundColor: alpha('#fff', 0.3)
+    //         },
+    //         '&::-webkit-scrollbar': {
+    //           width: '0.5em'
+    //         },
+    //         '&::-webkit-scrollbar-track': {
+    //         },
+    //         '&::-webkit-scrollbar-thumb': {
+    //           backgroundColor: '#282a39',
+    //           borderRadius: 5
+    //         }
+    //       }}>
+    //         {listFriend.map((item, index) => {
+    //           return (
+    //             <Fragment key={index}>
+    //               <HoverButton
+    //                 selected={selectedIndex === index}
+    //                 onClick={() => { handleClick(index, item) }}
+    //                 sx={{ borderRadius: 2 }}
+    //               >
+    //                 <ListItemAvatar>
+    //                   <Avatar>{item.NameFriend.split('')[0]}</Avatar>
+    //                 </ListItemAvatar>
+    //                 <ListItemText
+    //                   primary= {`${item.NameFriend}`}
+    //                   secondary={
+    //                     <Typography
+    //                       component="span"
+    //                       variant="body2"
+    //                       sx={{ opacity: 0.2 }}
+    //                     >
+    //                       Message
+    //                     </Typography>
+    //                   }
+    //                 >
+    //                 </ListItemText>
+    //                 <Typography variant='body2' sx={{ color: '#fff', opacity: 0.3 }}>
+    //                   6:22
+    //                 </Typography>
+    //               </HoverButton>
+    //               <Divider variant="middle" sx={{
+    //                 borderColor: alpha('#fff', 0.1)
+    //               }} />
+    //             </Fragment>
+    //           )
+    //         })}
+    //         {loading ? (
+    //           <ListItem
+    //             sx={{
+    //               '& .MuiSkeleton-root': {
+    //                 bgcolor: "grey.800"
+    //               }
+    //             }}>
+    //             <ListItemAvatar>
+    //               <Skeleton variant="circular" width={40} height={40} />
+    //             </ListItemAvatar>
+    //             <ListItemText>
+    //               <Skeleton variant="text" />
+    //               <Skeleton variant="text" />
+    //             </ListItemText>
+    //           </ListItem>
+    //         ) : null}
+    //       </List>
+    //     </div>
+    // </Box>
   )
 }
 

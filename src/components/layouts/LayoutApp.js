@@ -1,44 +1,22 @@
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
-import Hidden from '@mui/material/Hidden'
-import Divider from '@mui/material/Divider'
-import { alpha } from '@mui/material/styles'
-import SideBar from '../ui/SideBar'
-import ShowContainer from '../ui/container/ShowContainer'
-import ShowMenu from '../ui/menu/ShowMenu'
+import { useState } from "react"
+import style from "./css/layoutApp.module.scss"
+import SideBar from "../ui/sideBar/SideBar"
+import ShowMenu from "../ui/menu/ShowMenu"
 
 function LayoutApp() {
+  // const [isDisplayContainer, setIsDisplayContainer] = useState(false)
+  // console.log(isDisplayContainer)
   return (
-    <Box sx={{
-      'input': {
-        color: '#fff'
-      }
-    }}>
-      <Grid container columns={{ xs: 4, sm: 8, md: 12}}>
-        <Grid item xs={0.5} sm={0.5} md={0.5}>
-          <SideBar />
-        </Grid>
-        <Hidden smDown>
-          <Grid item xs sm={2} md={3}>
-            <ShowMenu />
-          </Grid>
-        </Hidden>
-        <Hidden smUp>
-          <Divider orientation="vertical" flexItem 
-            sx={{
-              '&':{
-                borderColor: alpha('#000', 0.8)
-              }
-            }}
-          />
-          <ShowMenu responsive />
-        </Hidden>
-        <Grid item xs sm={5.5} md>
-          <ShowContainer />
-        </Grid>
-      </Grid>
-    </Box>
-    
+    <div className={style.layoutApp}>
+      <SideBar className={style.sideBar} />
+      <ShowMenu className={style.menu} />
+      {/* <div className={style.menu}>
+        <div className={
+          `${style.subContainer} ${isDisplayContainer ? style.displayContainer : style.unDisplayContainer}`
+        }></div>
+      </div> */}
+      <div className={style.container}></div>
+    </div>
   )
 }
 export default LayoutApp

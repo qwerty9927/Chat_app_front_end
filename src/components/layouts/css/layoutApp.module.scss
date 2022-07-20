@@ -1,0 +1,77 @@
+.layoutApp {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.sideBar {
+  flex: 0.5;
+}
+
+.menu {
+  flex: 3;
+}
+
+.container {
+  background-color: blue;
+  flex: 8.5;
+}
+
+.subContainer {
+  display: none;
+  height: 100%;
+  background-color: red;
+  transform: translateX(100%);
+}
+
+@mixin animate($name, $duration, $timing_function, $fill_mode) {
+  animation: $name $duration $timing_function $fill_mode;
+}
+
+@mixin keyframes($name, $startPoint, $endPoint){
+  @keyframes #{$name} {
+    from {
+      transform: translateX($startPoint);
+    }
+    to {
+      transform: translateX($endPoint);
+    }
+  }
+}
+
+.displayContainer {
+  @include keyframes(slide_in, 100% , 0);
+  @include animate(slide_in, .5s, ease, forwards)
+}
+
+.unDisplayContainer {
+  @include keyframes(slide_out, 0 , 100%);
+  @include animate(slide_out, .5s, ease, forwards)
+}
+
+@media screen and (max-width: 600px) {
+  .sideBar {
+    flex: 1.5;
+  }
+  .menu {
+    flex: 10.5;
+  }
+  .container {
+    display: none;
+  }
+  .subContainer {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 960px) and (min-width: 600px) {
+  .sideBar {
+    flex: 1;
+  }
+  .menu {
+    flex: 4;
+  }
+  .container {
+    flex: 7;
+  }
+}

@@ -2,8 +2,6 @@ import clsx from 'clsx'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
-import * as request from '../../../api/axiosAuth'
 import { login, selectState, reset } from "../../features/auth/authSlice"
 import style from './css/auth.module.scss'
 
@@ -12,7 +10,6 @@ export default function Login() {
   const dispatch = useDispatch()
   const [formValues, setFormValues] = useState({})
   const [formErrors, setFormErrors] = useState({})
-  const navigate = useNavigate()
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormValues({ ...formValues, [name]: value})
