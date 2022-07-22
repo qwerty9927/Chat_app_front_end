@@ -1,18 +1,20 @@
 import clsx from "clsx"
 import style from "./css/listItem.module.scss"
+import Circle from "./Circle"
 
-function ListItem({ avatar, name, message, primary, selected, onClick}) {
+function ListItem({ avatar, name, hover, message, sx, primary, selected, onClick}) {
   console.log(avatar)
   return (
-    <div className={clsx(style.item, {[style.itemActive]: selected})} onClick={onClick}>
+    <div className={clsx(style.item, {[style.itemActive]: selected, [style.itemHover]: hover})} style={{sx}} onClick={onClick}>
       <div className={style.avatar}>
-        <div className={style.circle}>
+        <Circle>
           {avatar}
-        </div>
+        </Circle>
       </div>
       <div className={style.content}>
         <p className={style.name}>{name}</p>
-        <p className={style.message}>{null || message}</p>
+        {message ? <p className={style.message}>{message}</p>: null}
+        
       </div>
       <div className={style.action}>
         {null || primary}

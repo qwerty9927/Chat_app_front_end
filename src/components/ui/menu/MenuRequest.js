@@ -44,6 +44,9 @@ function MenuRequest({ className }) {
     async function fetchApi(){
       const result = await getData(pageDefault, quantityGetDefault)
       const quantity = await getQuantityData()
+      if(quantity >= 10){
+        setLoading(true)
+      }
       setQuantityOfRequest(quantity)
       setListRequest(result.requestOfQuery)
     }
@@ -99,12 +102,6 @@ function MenuRequest({ className }) {
   }, [featureBase])
 
   useEffect(() => {
-    if(quantityOfRequest > quantityGetDefault){
-      setLoading(true)
-    }
-  }, [quantityOfRequest])
-
-  useEffect(() => {
     if(infoItem){
       let newList = listRequest.map(item => {
         console.log(item, infoItem)
@@ -122,9 +119,10 @@ function MenuRequest({ className }) {
   }, [infoItem])
 
   const handleClick = (index, info) => {
-    console.log(info)
-    dispatch(selectItemRequest(info))
-    setSelectedIndex(index)
+    if(index !== selectedIndex){
+      dispatch(selectItemRequest(info))
+      setSelectedIndex(index)
+    }
   }
 
   async function handleChange(e) {
@@ -219,6 +217,7 @@ function MenuRequest({ className }) {
                   onClick={() => { handleClick(index, item) }}
                   avatar={item.NameUserReq.split("")[0]}
                   name={item.NameUserReq} 
+                  hover
                 >
                 </ListItem>
                 <div className={style.hr}></div>
@@ -229,145 +228,11 @@ function MenuRequest({ className }) {
             <ListItem 
               avatar={<Skeleton type="avatar" />}
               name={<Skeleton />} 
-              message={<Skeleton />}
             >
             </ListItem>
           ) : null}
       </div>
     </div>
-    // <Box 
-    //   sx={{
-    //     bgcolor: '#181a1e',
-    //     color: '#fff',
-    //     pl: 1,
-    //     height: '100vh',
-    //     '& .MuiSvgIcon-root': {
-    //       color: '#fff',
-    //       opacity: 0.3
-    //     }
-    //   }}
-    // >
-    //   <div>
-    //     <div>
-    //       <Box>
-    //         <ListItem
-    //           secondaryAction={
-    //             <HoverIconButton>
-    //               <MoreHorizIcon />
-    //             </HoverIconButton>
-    //           }>
-    //           <ListItemAvatar>
-    //             <Avatar>{state.currentUser.Name.split('')[0]}</Avatar>
-    //           </ListItemAvatar>
-    //           <ListItemText
-    //             primary={state.currentUser.Name}
-    //             secondary={
-    //               <Typography
-    //                 component="span"
-    //                 variant="body3"
-    //                 sx={{ opacity: 0.2 }}
-    //               >
-    //                 Infomation
-    //               </Typography>
-    //             }
-    //           >
-    //           </ListItemText>
-    //         </ListItem>
-    //       </Box>
-    //       <Box>
-    //         <ListItem 
-    //         >
-    //           <ListItemText>
-    //             <Typography component='span' variant="body1" sx={{fontWeight: 'bold'}} >
-    //               {`Message (${quantityOfRequest})`}
-    //             </Typography>
-    //           </ListItemText>
-    //         </ListItem>
-    //         <ListItem>
-    //           <TextField 
-    //             fullWidth 
-    //             placeholder='Search'
-    //             size='small'
-    //             sx={{
-    //               backgroundColor: '#121216',
-    //               '& input': {
-    //                 color: '#fff'
-    //               }
-    //             }} 
-    //             onChange={
-    //               handleChange
-    //             }
-    //           />
-    //           <HoverIconButton onClick={
-    //             handleSearch
-    //           }>
-    //             <SearchIcon />
-    //           </HoverIconButton>
-    //         </ListItem>
-    //       </Box>
-    //     </div>
-    //     <div style={{marginTop: 16}}>
-    //       <List
-    //       className='list'
-    //       sx={{
-    //         position: 'relative',
-    //         overflow: 'auto',
-    //         height: 550, 
-    //         p: 0,
-    //         pr: 1,
-    //         '& .MuiListItemButton-root.Mui-selected': {
-    //           backgroundColor: alpha('#fff', 0.3)
-    //         },
-    //         '&::-webkit-scrollbar': {
-    //           width: '0.5em'
-    //         },
-    //         '&::-webkit-scrollbar-track': {
-    //         },
-    //         '&::-webkit-scrollbar-thumb': {
-    //           backgroundColor: '#282a39',
-    //           borderRadius: 5
-    //         }
-    //       }}>
-    //         {listRequest.map((item, index) => {
-    //           return (
-    //             <Fragment key={index}>
-    //               <HoverButton
-    //                 selected={selectedIndex === index}
-    //                 onClick={() => { handleClick(index, item) }}
-    //                 sx={{ borderRadius: 2 }}
-    //               >
-    //                 <ListItemAvatar>
-    //                   <Avatar>{item.NameUserReq.split('')[0]}</Avatar>
-    //                 </ListItemAvatar>
-    //                 <ListItemText>
-    //                   {item.NameUserReq}
-    //                 </ListItemText>
-    //               </HoverButton>
-    //               <Divider variant="middle" sx={{
-    //                 borderColor: alpha('#fff', 0.1)
-    //               }} />
-    //             </Fragment>
-    //           )
-    //         })}
-    //         {loading ? (
-    //           <ListItem
-    //             sx={{
-    //               '& .MuiSkeleton-root': {
-    //                 bgcolor: "grey.800"
-    //               }
-    //             }}>
-    //             <ListItemAvatar>
-    //               <Skeleton variant="circular" width={40} height={40} />
-    //             </ListItemAvatar>
-    //             <ListItemText>
-    //               <Skeleton variant="text" />
-    //             </ListItemText>
-    //           </ListItem>
-    //         ) : null}
-    //       </List>
-    //     </div>
-    //   </div>
-    // </Box>
   )
 }
 

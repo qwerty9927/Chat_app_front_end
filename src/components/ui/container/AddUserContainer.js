@@ -1,18 +1,16 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Cookies from 'js-cookie'
-import Box from "@mui/material/Box"
-import ListItem from "@mui/material/ListItem"
-import Avatar from "@mui/material/Avatar"
-import Button from "@mui/material/Button"
-import ListItemText from "@mui/material/ListItemText"
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
+import clsx from 'clsx'
+
+//My import
 import axiosToken from '../../../api/axiosToken'
 import { selectState } from "../../features/auth/authSlice"
 import { selectItemUser, selectStateContainer } from '../../features/container/containerSlice'
+import style from './css/container.module.scss'
+import ListItem from '../utils/ListItem'
 
-function AddUserContainer() {
+function AddUserContainer({className}) {
   const state = useSelector(selectState)
   const containerState = useSelector(selectStateContainer)
   const infoItem = containerState.items.itemUser
@@ -35,49 +33,25 @@ function AddUserContainer() {
     }
   }
   return (
-    <Box
-      sx={{
-        bgcolor: '#131317',
-        height: '100vh',
-        p: 2
-      }}
-    >
-      <ListItem>
-        <Avatar
-          sx={{ width: 56, height: 56 }}
-        >
-          {infoItem.Name.split('')[0]}
-        </Avatar>
-        <ListItemText
-          sx={{
-            color: '#fff',
-            pl: 2,
-            '& > span': {
-              fontSize: 30
-            }
-          }}
-        >
-          {infoItem.Name}
-        </ListItemText>
-      </ListItem>
-      <Box
-        sx={{
-          '& button': {
-            mt: 1
-          }
-        }}
-      >
+    <div className={clsx(className, style.addUserContainer)}>
+      <ListItem 
+        avatar={infoItem.Name.split('')[0]}
+        name={infoItem.Name}
+      ></ListItem>
+      <div className={style.buttonGroup}>
         {infoItem.submitted || infoItem.idUserLog ?
-          (<Button variant="outlined" fullWidth startIcon={<HourglassBottomIcon />}>
+          (<button className={style.btnWaitAccept}>
+            <i className="fa-solid fa-hourglass-start"></i>
             Wait Accept
-          </Button>)
+          </button>)
           :
-          (<Button variant="contained" fullWidth startIcon={<PersonAddIcon />} onClick={handleSentRequest}>
+          (<button className={style.btnAdd} onClick={handleSentRequest}>
+            <i className="fa-solid fa-user-plus"></i>
             Add friend
-          </Button>)
+          </button>)
         }
-      </Box>
-    </Box>
+      </div>
+    </div>
   )
 }
 

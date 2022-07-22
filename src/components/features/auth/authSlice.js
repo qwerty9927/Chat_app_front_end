@@ -45,7 +45,7 @@ const logout = createAsyncThunk(
   }
 )
 
-const initialState = JSON.parse(localStorage.getItem('auth')) || {
+const initialState = {
   isFetching: false,
   isSuccess: false,
   isError: false,
@@ -55,7 +55,7 @@ const initialState = JSON.parse(localStorage.getItem('auth')) || {
 
 const authSlice = createSlice({
   name: "authorization",
-  initialState,
+  initialState: JSON.parse(localStorage.getItem('auth')) || initialState,
   reducers: {
     reset: (state) => {
       return initialState

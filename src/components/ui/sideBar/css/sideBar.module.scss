@@ -1,5 +1,8 @@
-.sideBar {
+.defaultSideBar {
+  height: 100%;
   background-color: #121216;
+}
+.sideBar {
   display: flex;
   flex-direction: column;
 }

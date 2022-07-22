@@ -172,6 +172,7 @@ function MenuAdd({ className }){
                   onClick={() => { handleClick(index, item) }}
                   avatar={item.Name.split("")[0]}
                   name={item.Name} 
+                  hover
                   primary={
                     item.idUserLog || item.submitted 
                     ?
@@ -191,160 +192,11 @@ function MenuAdd({ className }){
             <ListItem 
               avatar={<Skeleton type="avatar" />}
               name={<Skeleton />} 
-              message={<Skeleton />}
             >
             </ListItem>
           ) : null}
       </div>
     </div>
   )
-
-  // return (
-  //   <Box 
-  //     sx={{
-  //       bgcolor: '#181a1e',
-  //       color: '#fff',
-  //       pl: 1,
-  //       height: '100vh',
-  //       '& .MuiSvgIcon-root': {
-  //         color: '#fff',
-  //         opacity: 0.3
-  //       }
-  //     }}
-  //   >
-  //     <div>
-  //       <div>
-  //         <Box>
-  //           <ListItem
-  //             secondaryAction={
-  //               <HoverIconButton>
-  //                 <MoreHorizIcon />
-  //               </HoverIconButton>
-  //             }>
-  //             <ListItemAvatar>
-  //               <Avatar>{state.currentUser.Name.split('')[0]}</Avatar>
-  //             </ListItemAvatar>
-  //             <ListItemText
-  //               primary={state.currentUser.Name}
-  //               secondary={
-  //                 <Typography
-  //                   component="span"
-  //                   variant="body3"
-  //                   sx={{ opacity: 0.2 }}
-  //                 >
-  //                   Infomation
-  //                 </Typography>
-  //               }
-  //             >
-  //             </ListItemText>
-  //           </ListItem>
-  //         </Box>
-  //         <Box>
-  //           <ListItem 
-  //           >
-  //             <ListItemText>
-  //               <Typography component='span' variant="body1" sx={{fontWeight: 'bold'}} >
-  //                 {`Users (${quantityOfItem})`}
-  //               </Typography>
-  //             </ListItemText>
-  //           </ListItem>
-  //           <ListItem>
-  //             <TextField 
-  //               fullWidth 
-  //               placeholder='Search'
-  //               size='small'
-  //               sx={{
-  //                 backgroundColor: '#121216',
-  //                 '& input': {
-  //                   color: '#fff'
-  //                 }
-  //               }} 
-  //               onChange={
-  //                 handleChange
-  //               }
-  //             />
-  //             <HoverIconButton onClick={
-  //               handleSearch
-  //             }>
-  //               <SearchIcon />
-  //             </HoverIconButton>
-  //           </ListItem>
-  //         </Box>
-  //       </div>
-  //       <div style={{marginTop: 16}}>
-  //         <List
-  //         className="list"
-  //         sx={{
-  //           position: 'relative',
-  //           overflow: 'auto',
-  //           height: 550, 
-  //           p: 0,
-  //           pr: 1,
-  //           '& .MuiListItemButton-root.Mui-selected': {
-  //             backgroundColor: alpha('#fff', 0.3)
-  //           },
-  //           '&::-webkit-scrollbar': {
-  //             width: '0.5em'
-  //           },
-  //           '&::-webkit-scrollbar-track': {
-  //           },
-  //           '&::-webkit-scrollbar-thumb': {
-  //             backgroundColor: '#282a39',
-  //             borderRadius: 5
-  //           }
-  //         }}>
-  //           {listUser.map((item, index) => {
-  //             return (
-  //               <Fragment key={index}>
-  //               <ListItem 
-  //                 disablePadding
-  //                 secondaryAction={
-  //                   item.idUserLog || item.submitted ?
-  //                     <Chip label="Wait Accept" sx={{
-  //                         color: '#fff',
-  //                         opacity: 0.8
-  //                     }}/>
-  //                     :
-  //                     <HoverIconButton onClick={() => {handleSentRequest(item.Username)}}><PersonAddIcon /></HoverIconButton>
-  //                 }>
-  //                 <HoverButton
-  //                   selected={selectedIndex === index}
-  //                   onClick={() => { handleClick(index, item) }}
-  //                   sx={{ borderRadius: 2 }}
-  //                 >
-  //                   <ListItemAvatar>
-  //                     <Avatar>{item.Name.split('')[0]}</Avatar>
-  //                   </ListItemAvatar>
-  //                   <ListItemText>
-  //                     {item.Name}
-  //                   </ListItemText>
-  //                 </HoverButton>
-  //               </ListItem>
-  //               <Divider variant="middle" sx={{
-  //                 borderColor: alpha('#fff', 0.1)
-  //               }} />
-  //               </Fragment>
-  //             )
-  //           })}
-  //           {loading ? (
-  //             <ListItem
-  //               sx={{
-  //                 '& .MuiSkeleton-root': {
-  //                   bgcolor: "grey.800"
-  //                 }
-  //               }}>
-  //               <ListItemAvatar>
-  //                 <Skeleton variant="circular" width={40} height={40} />
-  //               </ListItemAvatar>
-  //               <ListItemText>
-  //                 <Skeleton variant="text" />
-  //               </ListItemText>
-  //             </ListItem>
-  //           ) : null}
-  //         </List>
-  //       </div>
-  //     </div>
-  //   </Box>
-  // )
 }
 export default MenuAdd
