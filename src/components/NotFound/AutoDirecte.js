@@ -7,7 +7,6 @@ function AutoDirecte(){
     navigate('/')
 
   })
-  // return ({navigate('/')})
 }
 
 export default AutoDirecte
