@@ -38,7 +38,7 @@ function ChatContainer({className}) {
   const quantityGetDefault = 10
   const pageDefault = 0
 
-  console.log(loading)
+  // console.log(loading)
 
   useEffect(() => {
     async function fetchApi() {
@@ -60,7 +60,7 @@ function ChatContainer({className}) {
       console.log(res)
       setTextMessage(preState => [...preState, res])
     })
-    console.log("render")
+    // console.log("render")
   }, [socket])
 
   useEffect(() => {
@@ -68,8 +68,8 @@ function ChatContainer({className}) {
     let page = 0
     const handleScroll = async (e) => {
       const el = e.target
-      console.log(el.scrollTop - el.clientHeight, el.scrollHeight)
-      console.log(Math.ceil(el.scrollTop - el.clientHeight) === 1 - el.scrollHeight)
+      // console.log(el.scrollTop - el.clientHeight, el.scrollHeight)
+      // console.log(Math.ceil(el.scrollTop - el.clientHeight) === 1 - el.scrollHeight)
       if (Math.ceil(el.scrollTop - el.clientHeight) === 1 - el.scrollHeight) {
         const result = await getData(++page, quantityGetDefault)
         if (!result.messageOfQuery.length) {

@@ -11,7 +11,7 @@ import { selectStateContainer } from "../features/container/containerSlice"
 function LayoutApp() {
   const state = useSelector(selectStateContainer)
 
-  console.log(state.showContainer)
+  // console.log(state.showContainer)
   return (
     <div className={style.layoutApp}>
       <div className={style.sideBar}>

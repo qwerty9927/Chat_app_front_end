@@ -3,7 +3,7 @@ import style from "./css/listItem.module.scss"
 import Circle from "./Circle"
 
 function ListItem({ avatar, name, hover, message, sx, primary, selected, onClick}) {
-  console.log(avatar)
+  // console.log(avatar)
   return (
     <div className={clsx(style.item, {[style.itemActive]: selected, [style.itemHover]: hover})} style={{sx}} onClick={onClick}>
       <div className={style.avatar}>

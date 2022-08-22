@@ -18,9 +18,16 @@ function RequestContainer({className}) {
   console.log(infoItem)
 
   async function handleSendRefuse(){
+    const friend = {
+      Username: infoItem.idUser,
+    }
     try{
-      await axiosToken.delete(`user/refuseRequest?idRefuse=${infoItem.idUser}`
+      await axiosToken.delete(`response/refuseRequestUser`
       ,{
+        data: {
+          friend,
+          mySelf: state.currentUser
+        },
         headers: {
           Authorization: `Bearer ${Cookies.get('accessToken')}`
         } 
@@ -39,7 +46,7 @@ function RequestContainer({className}) {
       Image: infoItem.Image
     }
     try{
-      await axiosToken.post(`user/addFriend`
+      await axiosToken.post(`response/acceptRequestUser`
       ,{
         friend,
         mySelf: state.currentUser

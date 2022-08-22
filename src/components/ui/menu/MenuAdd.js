@@ -31,7 +31,7 @@ function MenuAdd({ className }){
   // console.log(listUser)
   // console.log("Search", featureSearch)
   
-  console.log(containerState)
+  // console.log(containerState)
 
   //call api
   useEffect(() => {
@@ -41,7 +41,7 @@ function MenuAdd({ className }){
       const el = e.target
       if(Math.ceil(el.scrollTop + el.clientHeight) === el.scrollHeight){
         const result = await getDataSearch(++page, quantityGetDefault)
-        console.log("search")
+        // console.log("search")
         if(!result.userOfQuery.length){
           setLoading(false)
           setFeatureSearch(preState => ({...preState, loadMore: false}))
@@ -99,7 +99,7 @@ function MenuAdd({ className }){
 
   async function handleSentRequest(idFriend){
     try{
-      await axiosToken.post('user/addRequest', {
+      await axiosToken.post('request/sendRequestUser', {
         friend: {Username: idFriend},
         mySelf: state.currentUser
       },{
@@ -116,14 +116,14 @@ function MenuAdd({ className }){
       })
       setListUser(newList)
     } catch(e){
-      console.log(e)
+      // console.log(e)
       alert("Sent failed")
     }
   }
 
   async function getDataSearch(page, quantity){
     return (await axiosToken.get(
-      `search/addUser?searchValue=${valueOfInput}&page=${page}&quantity=${quantity}`
+      `search/searchUser?searchValue=${valueOfInput}&page=${page}&quantity=${quantity}`
       ,{
         headers:{
           Authorization: `Bearer ${Cookies.get("accessToken")}`
@@ -133,7 +133,7 @@ function MenuAdd({ className }){
 
   async function getQuantityDataSearch(){
     return (await axiosToken.get(
-      `search/quantityNewUserFound?searchValue=${valueOfInput}`
+      `search/quantityUserFound?searchValue=${valueOfInput}`
       ,{
         headers:{
           Authorization: `Bearer ${Cookies.get("accessToken")}`
@@ -174,7 +174,7 @@ function MenuAdd({ className }){
                   name={item.Name} 
                   hover
                   primary={
-                    item.idUserLog || item.submitted 
+                    item.inLog || item.submitted 
                     ?
                       <span className={style.chip}>Wait Accept</span>
                     :

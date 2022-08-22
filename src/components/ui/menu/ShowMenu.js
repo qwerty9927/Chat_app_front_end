@@ -11,7 +11,7 @@ function ShowMenu() {
   const state = useSelector(selectStateMenu)
   const dispatch = useDispatch()
   const classNameGeneral = style.defaultMenu
-  let Component
+  let Component = null
  
   switch (state.type) {
     case menuMessage:
@@ -24,8 +24,11 @@ function ShowMenu() {
       Component = MenuRequest
       break
   }
+  
   return (
-    <Component className={classNameGeneral}/>
+    <>
+      {Component ? <Component className={classNameGeneral}/> : null}
+    </>
   )
 }
 

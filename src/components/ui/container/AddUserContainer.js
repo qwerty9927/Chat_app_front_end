@@ -16,10 +16,10 @@ function AddUserContainer({className}) {
   const infoItem = containerState.items.itemUser
   const dispatch = useDispatch()
 
-  console.log(infoItem)
+  // console.log(infoItem)
   async function handleSentRequest() {
     try {
-      await axiosToken.post('user/addRequest', {
+      await axiosToken.post('request/sendRequestUser', {
         friend: { Username: infoItem.Username },
         mySelf: state.currentUser
       }, {
@@ -39,7 +39,7 @@ function AddUserContainer({className}) {
         name={infoItem.Name}
       ></ListItem>
       <div className={style.buttonGroup}>
-        {infoItem.submitted || infoItem.idUserLog ?
+        {infoItem.submitted || infoItem.inLog ?
           (<button className={style.btnWaitAccept}>
             <i className="fa-solid fa-hourglass-start"></i>
             Wait Accept
