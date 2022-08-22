@@ -60,7 +60,7 @@ function MenuRequest({ className }) {
       const el = e.target
       if(Math.ceil(el.scrollTop + el.clientHeight) === el.scrollHeight){
         const result = await getDataSearch(++page, quantityGetDefault)
-        console.log("search")
+        // console.log("search")
         if(!result.requestOfQuery.length){
           setLoading(false)
           setFeatureSearch(preState => ({...preState, loadMore: false}))
@@ -90,7 +90,7 @@ function MenuRequest({ className }) {
         } else {
           setListRequest(preState => [...preState, ...result.requestOfQuery])
         }
-        console.log("friend")
+        // console.log("friend")
       } 
     }
     if(featureBase.status && featureBase.loadMore){
@@ -104,7 +104,7 @@ function MenuRequest({ className }) {
   useEffect(() => {
     if(infoItem){
       let newList = listRequest.map(item => {
-        console.log(item, infoItem)
+        // console.log(item, infoItem)
         if(item.idUser === infoItem.idUser && infoItem.submitted){
           dispatch(clearAllItems())
         } else {
@@ -148,7 +148,7 @@ function MenuRequest({ className }) {
 
   async function getData(page, quantity){
     return (await axiosToken.get(
-      `user/listRequest?page=${page}&quantity=${quantity}`
+      `request/listRequest?page=${page}&quantity=${quantity}`
       ,{
         headers:{
           Authorization: `Bearer ${Cookies.get("accessToken")}`
@@ -168,7 +168,7 @@ function MenuRequest({ className }) {
 
   async function getQuantityData(){
     return (await axiosToken.get(
-      `user/quantityListRequest`
+      `request/quantityListRequest`
       ,{
         headers:{
           Authorization: `Bearer ${Cookies.get("accessToken")}`

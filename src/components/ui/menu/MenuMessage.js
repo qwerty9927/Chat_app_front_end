@@ -60,7 +60,7 @@ function MenuMessage({ className }) {
       const el = e.target
       if (Math.ceil(el.scrollTop + el.clientHeight) === el.scrollHeight) {
         const result = await getDataSearch(++page, quantityGetDefault)
-        console.log("search")
+        // console.log("search")
         if (!result.friendOfQuery.length) {
           setFeatureSearch(preState => ({ ...preState, loadMore: false }))
           setLoading(false)
@@ -80,14 +80,14 @@ function MenuMessage({ className }) {
   //Sử lý scroll
   useEffect(() => {
     let page = 0
-    console.log(`.${style.list}`)
+    // console.log(`.${style.list}`)
     const list = document.querySelector(`.list`)
-    console.log(list)
+    // console.log(list)
     const handleScroll = async (e) => {
       const el = e.target;
       if (Math.ceil(el.scrollTop + el.clientHeight) === el.scrollHeight - 1) {
         const result = await getData(++page, quantityGetDefault)
-        console.log("friend")
+        // console.log("friend")
         if (!result.friendOfQuery.length) {
           setFeatureBase(preState => ({ ...preState, loadMore: false }))
           setLoading(false)

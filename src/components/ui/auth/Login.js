@@ -4,9 +4,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { login, selectState, reset } from "../../features/auth/authSlice"
 import style from './css/auth.module.scss'
+import { selectStateMenu, initMenu } from '../../features/menu/menuSlice'
 
 export default function Login() {
   const user = useSelector(selectState)
+  const stateMenu = useSelector(selectStateMenu)
   const dispatch = useDispatch()
   const [formValues, setFormValues] = useState({})
   const [formErrors, setFormErrors] = useState({})
@@ -26,6 +28,7 @@ export default function Login() {
       return false
     }
     setFormErrors({})
+    dispatch(initMenu())
     dispatch(login(formValues))
   }
 
