@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
-import Box from '@mui/material/Box'
+import clsx from 'clsx'
 import { selectStateMenu } from '../../features/menu/menuSlice'
+import style from './css/container.module.scss'
 import ChatContainer from './ChatContainer'
 import AddUserContainer from './AddUserContainer'
 import RequestContainer from './RequestContainer'
@@ -9,25 +10,20 @@ import { selectStateContainer } from '../../features/container/containerSlice'
 function ShowContainer(){
   const state = useSelector(selectStateMenu)
   const stateContainer = useSelector(selectStateContainer)
+  const classNameGeneral = style.defaultContainer
   let Component = () => {
     return (
-      <Box 
-        sx={{
-          bgcolor: '#131317',
-          height: '100vh',
-        }}
-      >
-      </Box>
+      <div className={classNameGeneral}></div>
     )
   }
 
   //Chọn container
   if(state.status.chat && stateContainer.items.itemChat){
-    Component = () => <ChatContainer />
+    Component = () => <ChatContainer className={classNameGeneral} />
   } else if(state.status.addUser && stateContainer.items.itemUser) {
-    Component = () => <AddUserContainer />
+    Component = () => <AddUserContainer className={classNameGeneral} />
   } else if(state.status.request && stateContainer.items.itemRequest){
-    Component = () => <RequestContainer />
+    Component = () => <RequestContainer className={classNameGeneral} />
   }
   return (
     <Component />

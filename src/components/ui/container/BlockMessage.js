@@ -1,6 +1,5 @@
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-import Avatar from '@mui/material/Avatar'
+import style from './css/container.module.scss'
+import Circle from '../utils/Circle'
 
 function BlockMessage({ data, nameFriend, nameRoot, idRootUser }) {
   console.log(data)
@@ -10,103 +9,36 @@ function BlockMessage({ data, nameFriend, nameRoot, idRootUser }) {
   }
   return (
     <>
-      {data.map((item, index) => {
-        if (item.idAuthor === idRootUser) {
+      {data.map((item ,index) => {
+        if(item.idAuthor === idRootUser){
           return (
-            <Box key={index} sx={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-            }}>
-              <Box sx={{ mr: 1 }}>
-                <Typography
-                  align='right'
-                  sx={{
-                    fontWeight: 'bold'
-                  }}
-                >
-                  <Typography
-                    component="span"
-                    variant="caption"
-                    sx={{
-                      opacity: 0.5,
-                      mr: 1
-                    }}
-                  >
-                    {convertTime(item.Time)}
-                  </Typography>
-                  You
-                </Typography>
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'flex-end'
-                    }}
-                  >
-                    <Typography 
-                      variant="body2" 
-                      sx={{
-                        bgcolor: '#2295ff',
-                        p: 1,
-                        pl: 2,
-                        pr: 2,
-                        borderRadius: 4,
-                        borderTopRightRadius: 0,
-                      }}
-                    >
-                      {item.Message}
-                    </Typography>
-                  </Box>
-              </Box>
-              <Avatar>{nameRoot.split('')[0]}</Avatar>
-            </Box>
+            <div className={style.message_author} key={index}>
+              <div className={style.message}>
+                <div className={style.message_title}>
+                  <span className={style.time}>{convertTime(item.Time)}</span>
+                  <span className={style.name}>You</span>
+                </div>
+                <div className={style.message_content}>
+                  <p className={style.text}>{item.Message}</p>
+                </div>
+              </div>
+              <Circle>{nameRoot.split('')[0]}</Circle>
+            </div>
           )
         } else {
           return (
-            <Box key={index} sx={{
-              display: 'flex',
-            }}>
-              <Avatar>{nameFriend.split('')[0]}</Avatar>
-              <Box sx={{ ml: 1 }}>
-                <Typography
-                  align='left'
-                  sx={{
-                    fontWeight: 'bold'
-                  }}
-                >
-                  {nameFriend}
-                  <Typography
-                    component="span"
-                    variant="caption"
-                    sx={{
-                      opacity: 0.5,
-                      ml: 1
-                    }}
-                  >
-                    {convertTime(item.Time)}
-                  </Typography>
-                </Typography>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'flex-start'
-                  }}
-                >
-                  <Typography 
-                    variant="body2" 
-                    sx={{
-                      bgcolor: '#292b33',
-                      p: 1,
-                      pl: 2,
-                      pr: 2,
-                      borderRadius: 4,
-                      borderTopLeftRadius: 0
-                    }}
-                  >
-                    {item.Message}
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
+            <div className={style.message_other} key={index}>
+              <Circle>{nameFriend.split('')[0]}</Circle>
+              <div className={style.message} style={{margin: 0, marginLeft: '0.625rem'}}>
+                <div className={style.message_title} style={{textAlign: 'left'}}>
+                  <span className={style.name} style={{margin: 0, marginRight: '0.625rem'}} >{nameFriend}</span>
+                  <span className={style.time}>{convertTime(item.Time)}</span>
+                </div>
+                <div className={style.message_content} style={{justifyContent: 'flex-start'}}>
+                  <p className={style.text} style={{borderRadius: '1rem', borderTopLeftRadius: 0, backgroundColor: '#292b33'}}>{item.Message}</p>
+                </div>
+              </div>
+            </div>
           )
         }
       })}

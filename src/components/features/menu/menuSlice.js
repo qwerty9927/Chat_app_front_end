@@ -7,30 +7,38 @@ const initialState = {
     chat: true,
     addUser: false,
     request: false
-  }
+  },
+  choiceItem: { status: false }
 }
 
 const menuSlice = createSlice({
   name: "menu",
   initialState,
   reducers: {
+    initMenu(){
+      return initialState
+    },
     selectMessage(state, action) {
-      return {  ...initialState, type: menuMessage, status: {...initialState.status, chat: true }}
+      return { ...state, type: menuMessage, status: { ...initialState.status, chat: true } }
     },
     selectAdd(state, action) {
-      return {  ...initialState, type: menuAdd, status: {...initialState.status, chat: false, addUser: true }}
+      return { ...state, type: menuAdd, status: { ...initialState.status, chat: false, addUser: true } }
     },
     selectRequest(state, action) {
-      return {  ...initialState, type: menuRequest, status: {...initialState.status, chat: false, request: true }}
+      return { ...state, type: menuRequest, status: { ...initialState.status, chat: false, request: true } }
     },
-    clearAllMenu(state){
-      return initialState
+    cleanChoiceItem(state, action) {
+      return { ...state, choiceItem: { status: true } }
+    },
+    clearAllMenu(state) {
+      console.log({...initialState, type: null, status: {...initialState.status, chat: false}})
+      return {...initialState, type: null, status: {chat: false}}
     }
   }
 })
 
 export default menuSlice.reducer
-export const { selectMessage, selectAdd, selectRequest, clearDom, clearAllMenu } = menuSlice.actions
-export function selectStateMenu(state){
+export const { selectMessage, selectAdd, selectRequest, clearAllMenu, cleanChoiceItem, initMenu } = menuSlice.actions
+export function selectStateMenu(state) {
   return state.menu
 }
